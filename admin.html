@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>40-Day Accountability Challenge - Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="dashboard-page admin-page">
+    <main class="shell shell--dashboard">
+      <section class="dashboard-screen admin-screen">
+        <header class="today-hero">
+          <div class="today-hero__copy">
+            <p class="eyebrow">Admin overview</p>
+            <h1 id="adminTitle">Read-only control room</h1>
+            <p id="adminDateLine" class="lede">Loading Central Time date...</p>
+            <p id="adminInstruction" class="today-instruction">
+              Inspect the full timesheet and the daily matrix dashboard. Editing is disabled.
+            </p>
+          </div>
+
+          <div class="today-hero__meta">
+            <div class="meta-chip meta-chip--wide">
+              <span class="meta-chip__label">Signed in as</span>
+              <strong>Admin</strong>
+            </div>
+            <div class="meta-chip">
+              <span class="meta-chip__label">Live view</span>
+              <strong id="adminDayTag">Day 1</strong>
+            </div>
+            <button id="logoutBtn" class="logout-button" type="button">Logout</button>
+          </div>
+        </header>
+
+        <section class="stats-strip admin-stats" aria-label="Admin summary">
+          <article class="stat-card">
+            <span>Kiran progress</span>
+            <strong id="adminKiranProgress">0 / 80</strong>
+          </article>
+          <article class="stat-card">
+            <span>Shashwat progress</span>
+            <strong id="adminShashwatProgress">0 / 80</strong>
+          </article>
+          <article class="stat-card stat-card--progress">
+            <div class="progress-meta">
+              <span>Completion</span>
+              <span id="adminPercent">0%</span>
+            </div>
+            <div class="progress-bar" aria-hidden="true">
+              <span id="adminProgressFill"></span>
+            </div>
+          </article>
+        </section>
+
+        <section class="workspace-shell">
+          <div class="workspace-shell__head">
+            <div>
+              <h2>Timesheet</h2>
+              <p>Read-only view of the full 40-day timesheet with today's row highlighted.</p>
+            </div>
+            <span class="save-state">Live data from local storage</span>
+          </div>
+          <div class="table-wrap admin-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Day</th>
+                  <th>Date</th>
+                  <th>Kiran AM</th>
+                  <th>Kiran PM</th>
+                  <th>Shashwat AM</th>
+                  <th>Shashwat PM</th>
+                </tr>
+              </thead>
+              <tbody id="adminTimesheetBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="workspace-shell matrix-shell">
+          <div class="workspace-shell__head">
+            <div>
+              <h2>Matrix dashboard</h2>
+              <p>Quick read of the challenge in a four-quadrant matrix built for spotting momentum and gaps.</p>
+            </div>
+            <span class="save-state">Read only</span>
+          </div>
+
+          <div class="matrix-grid">
+            <article class="matrix-card matrix-card--accent">
+              <span class="matrix-label">Morning momentum</span>
+              <strong id="matrixMorning">0%</strong>
+              <p>How strong the morning sessions are across both participants.</p>
+            </article>
+            <article class="matrix-card">
+              <span class="matrix-label">Evening momentum</span>
+              <strong id="matrixEvening">0%</strong>
+              <p>Evening consistency and late-day follow-through.</p>
+            </article>
+            <article class="matrix-card">
+              <span class="matrix-label">Kiran lead</span>
+              <strong id="matrixKiran">0%</strong>
+              <p>Kiran's current completion ratio across the full challenge.</p>
+            </article>
+            <article class="matrix-card">
+              <span class="matrix-label">Shashwat lead</span>
+              <strong id="matrixShashwat">0%</strong>
+              <p>Shashwat's current completion ratio across the full challenge.</p>
+            </article>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="admin.js"></script>
+  </body>
+</html>

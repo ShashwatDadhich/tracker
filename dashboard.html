@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>40-Day Accountability Challenge - Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="dashboard-page">
+    <main class="shell shell--dashboard">
+      <section class="dashboard-screen">
+        <header class="today-hero">
+          <div class="today-hero__copy">
+            <p class="eyebrow">Daily check-in</p>
+            <h1 id="currentDayLabel">Challenge Day</h1>
+            <p id="currentDateLine" class="lede">Loading Central Time date...</p>
+            <p id="todayInstruction" class="today-instruction">
+              Sign in, mark Kiran's progress for today, and report the time taken.
+            </p>
+          </div>
+
+          <div class="today-hero__meta">
+            <div class="meta-chip meta-chip--wide">
+              <span class="meta-chip__label">Signed in as</span>
+              <strong id="activeSignerLabel">Shashwat</strong>
+            </div>
+            <div class="meta-chip">
+              <span class="meta-chip__label">Today</span>
+              <strong id="currentDayTag">Day 1</strong>
+            </div>
+            <button id="logoutBtn" class="logout-button" type="button">Logout</button>
+          </div>
+        </header>
+
+        <section class="stats-strip" aria-label="Today summary">
+          <article class="stat-card">
+            <span>Completed</span>
+            <strong id="doneCount">0</strong>
+          </article>
+          <article class="stat-card">
+            <span>Remaining</span>
+            <strong id="remainingCount">80</strong>
+          </article>
+          <article class="stat-card stat-card--progress">
+            <div class="progress-meta">
+              <span>Overall progress</span>
+              <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress-bar" aria-hidden="true">
+              <span id="progressFill"></span>
+            </div>
+          </article>
+        </section>
+
+        <section class="workspace-shell">
+          <div class="workspace-shell__head">
+            <div>
+              <h2>Today's mark board</h2>
+              <p id="workspaceCopy">Only today's Kiran progress cards are shown.</p>
+            </div>
+            <div class="workspace-tools" aria-label="Edit day controls">
+              <label class="day-picker" for="editableDaySelect">
+                <span>Edit day</span>
+                <select id="editableDaySelect"></select>
+              </label>
+              <span id="saveState" class="save-state">Saved locally</span>
+            </div>
+          </div>
+
+          <div id="sessionBoard" class="session-board"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
