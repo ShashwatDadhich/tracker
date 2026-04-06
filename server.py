@@ -169,8 +169,8 @@ def save_state(state: list[dict]) -> None:
 
 def main() -> None:
     ensure_database()
-    server = ThreadingHTTPServer(("127.0.0.1", DEFAULT_PORT), RequestHandler)
-    print(f"Serving on http://127.0.0.1:{DEFAULT_PORT}")
+    server = ThreadingHTTPServer(("0.0.0.0", DEFAULT_PORT), RequestHandler)
+    print(f"Serving on http://0.0.0.0:{DEFAULT_PORT}")
     try:
         server.serve_forever()
     except KeyboardInterrupt:
