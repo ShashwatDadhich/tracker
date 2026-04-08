@@ -71,7 +71,7 @@ function renderHeader() {
   adminTitle.textContent = "Read-only control room";
   adminDayTag.textContent = currentDayText;
   adminDateLine.textContent = formatLongDateInCT(now);
-  adminInstruction.textContent = "Inspect the full timesheet and the daily matrix dashboard. Editing is disabled.";
+  adminInstruction.textContent = "";
 }
 
 async function init() {

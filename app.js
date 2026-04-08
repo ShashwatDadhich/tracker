@@ -26,6 +26,7 @@ const progressPercent = document.getElementById("progressPercent");
 const progressFill = document.getElementById("progressFill");
 const saveState = document.getElementById("saveState");
 const editableDaySelect = document.getElementById("editableDaySelect");
+const signerFocusImage = document.getElementById("signerFocusImage");
 
 const activeSigner = loadActiveSigner();
 if (!activeSigner) {
@@ -155,6 +156,16 @@ function renderDashboardState() {
     todayInstruction.textContent = "Signed in as Shashwat.";
   } else {
     todayInstruction.textContent = "Signed in as Kiran.";
+  }
+
+  if (signerFocusImage) {
+    if (activeSigner === "Shashwat") {
+      signerFocusImage.src = "images/shashwat-focus.png";
+      signerFocusImage.alt = "Shashwat inspiration";
+    } else {
+      signerFocusImage.src = "images/kiran-focus.png";
+      signerFocusImage.alt = "Kiran inspiration";
+    }
   }
 
   activeSignerLabel.textContent = activeSigner;

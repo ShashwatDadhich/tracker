@@ -126,6 +126,15 @@ body::after {
   margin-top: 22px;
 }
 
+.welcome-image {
+  max-width: 100%;
+  width: 320px;
+  height: auto;
+  border-radius: 16px;
+  margin: 28px auto 0;
+  display: block;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16);
+}
 .auth-button,
 .logout-button {
   appearance: none;
@@ -1392,6 +1401,23 @@ body.dashboard-page .today-instruction {
   max-width: 44ch;
 }
 
+body.dashboard-page .today-instruction-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+body.dashboard-page .signer-focus-image {
+  width: 160px;
+  max-width: 26vw;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid rgba(23, 33, 43, 0.1);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.14);
+  flex: 0 0 auto;
+}
+
 body.dashboard-page .meta-chip {
   padding: 14px 16px;
   border-radius: 22px;
@@ -1766,6 +1792,7 @@ body.dashboard-page .table-shell {
   body.dashboard-page .time-presets {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
 }
 
 @media (max-width: 760px) {
@@ -1780,6 +1807,17 @@ body.dashboard-page .table-shell {
   body.dashboard-page .workspace-shell,
   body.dashboard-page .session-card {
     border-radius: 20px;
+  }
+
+  body.dashboard-page .today-instruction-row {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  body.dashboard-page .signer-focus-image {
+    width: 120px;
+    max-width: 32vw;
+    border-radius: 12px;
   }
 
   body.dashboard-page .today-hero__copy {

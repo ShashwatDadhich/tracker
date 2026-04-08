@@ -1,4 +1,4 @@
-# 40-Day Accountability Challenge App
+# 40-Day Yoga App
 
 A lightweight multi-page tracker for the mutual yoga accountability plan backed by SQLite.
 
