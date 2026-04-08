@@ -93,6 +93,21 @@ body::after {
   margin-right: auto;
 }
 
+.quote-label {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.auth-card .lede#dailyQuote {
+  max-width: 52ch;
+  font-size: 1.06rem;
+  line-height: 1.72;
+}
+
 .auth-actions {
   display: flex;
   gap: 12px;
@@ -813,6 +828,15 @@ td:nth-child(2), th:nth-child(2) {
 
   .auth-actions {
     flex-direction: column;
+  }
+
+  .quote-label {
+    font-size: 0.68rem;
+  }
+
+  .auth-card .lede#dailyQuote {
+    font-size: 0.96rem;
+    line-height: 1.64;
   }
 
   h1 {
