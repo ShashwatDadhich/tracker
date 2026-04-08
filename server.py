@@ -9,7 +9,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 BASE_DIR = Path(__file__).resolve().parent
-DB_PATH = BASE_DIR / "data" / "accountability.sqlite3"
+DB_PATH = Path(os.environ.get("DB_PATH", BASE_DIR / "data" / "accountability.sqlite3"))
 DEFAULT_PORT = int(os.environ.get("PORT", "8000"))
 DAYS = 40
 START_DATE = "2026-04-07"

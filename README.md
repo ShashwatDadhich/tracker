@@ -20,3 +20,13 @@ python3 server.py
 Then open `http://127.0.0.1:8000`.
 
 The server creates the SQLite database automatically on first run. If you want a reset, stop the server and delete `data/accountability.sqlite3`.
+
+## Render deployment
+If you want data to survive restarts and deploys on Render, add a Persistent Disk and set `DB_PATH` to the disk mount path, for example `/var/data/accountability.sqlite3`.
+
+Recommended Render settings:
+- Build Command: `pip install -r requirements.txt`
+- Start Command: `python server.py`
+- Environment Variable: `DB_PATH=/var/data/accountability.sqlite3`
+
+Without a mounted persistent disk, SQLite will be recreated when Render replaces the instance filesystem.
