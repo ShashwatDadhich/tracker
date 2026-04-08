@@ -1404,7 +1404,7 @@ body.dashboard-page .today-instruction {
 body.dashboard-page .today-instruction-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   gap: 14px;
 }
 

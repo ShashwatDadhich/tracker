@@ -152,11 +152,8 @@ function renderDashboardState() {
   currentDateLine.textContent = formatLongDateInCT(now);
   renderEditableDaySelector();
 
-  if (activeSigner === "Shashwat") {
-    todayInstruction.textContent = "Signed in as Shashwat.";
-  } else {
-    todayInstruction.textContent = "Signed in as Kiran.";
-  }
+  todayInstruction.textContent = "";
+
 
   if (signerFocusImage) {
     if (activeSigner === "Shashwat") {
