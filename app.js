@@ -4,6 +4,14 @@ const DAYS = 40;
 const START_DATE_PARTS = { year: 2026, month: 4, day: 7 };
 const CT_TIME_ZONE = "America/Chicago";
 const states = ["pending", "done"];
+const QUICK_TIME_PRESETS = [
+  { label: "0:30", minutes: 0, seconds: 30 },
+  { label: "1:00", minutes: 1, seconds: 0 },
+  { label: "1:30", minutes: 1, seconds: 30 },
+  { label: "2:00", minutes: 2, seconds: 0 },
+  { label: "3:00", minutes: 3, seconds: 0 },
+  { label: "5:00", minutes: 5, seconds: 0 },
+];
 
 const logoutBtn = document.getElementById("logoutBtn");
 const sessionBoard = document.getElementById("sessionBoard");
@@ -67,7 +75,9 @@ function sanitizeEntry(entry, fallback) {
 }
 
 function persist() {
-  saveState.textContent = "Saving...";
+  if (saveState) {
+    saveState.textContent = "Saving...";
+  }
   fetch("/api/state", {
     method: "PUT",
     headers: {
@@ -76,10 +86,14 @@ function persist() {
     body: JSON.stringify(store),
   })
     .then(() => {
-      saveState.textContent = "Saved in database";
+      if (saveState) {
+        saveState.textContent = "Saved in database";
+      }
     })
     .catch(() => {
-      saveState.textContent = "Save failed";
+      if (saveState) {
+        saveState.textContent = "Save failed";
+      }
     });
 }
 
@@ -177,20 +191,14 @@ function renderSessionBoard() {
         ${states.map((state) => `<button type="button" class="state-pill" data-state="${state}">${stateLabel(state)}</button>`).join("")}
       </div>
       <div class="session-time">
-        <div class="time-header">
-          <span>Set time</span>
-          <strong data-time-preview></strong>
-        </div>
         <div class="time-grid">
           <label class="time-group">
             <span>Minutes</span>
-            <input type="range" min="0" max="120" step="1" value="${duration.minutes}" data-minute-range />
-            <strong data-minute-value>${duration.minutes}</strong>
+            <select data-minute-select></select>
           </label>
           <label class="time-group">
             <span>Seconds</span>
-            <input type="range" min="0" max="59" step="1" value="${duration.seconds}" data-second-range />
-            <strong data-second-value>${duration.seconds}</strong>
+            <select data-second-select></select>
           </label>
         </div>
       </div>
@@ -202,55 +210,56 @@ function renderSessionBoard() {
 
     const badge = card.querySelector("[data-session-badge]");
     const summary = card.querySelector("[data-session-summary]");
-    const minuteRange = card.querySelector("[data-minute-range]");
-    const secondRange = card.querySelector("[data-second-range]");
-    const minuteValue = card.querySelector("[data-minute-value]");
-    const secondValue = card.querySelector("[data-second-value]");
-    const timePreview = card.querySelector("[data-time-preview]");
+    const minuteSelect = card.querySelector("[data-minute-select]");
+    const secondSelect = card.querySelector("[data-second-select]");
     const saveButton = card.querySelector(".session-save");
     const stateButtons = [...card.querySelectorAll(".state-pill")];
 
-    updateSessionCard(card, entry, badge, summary, minuteRange, secondRange, minuteValue, secondValue, timePreview);
+    populateTimeSelect(minuteSelect, 120, duration.minutes);
+    populateTimeSelect(secondSelect, 59, duration.seconds);
+
+    updateSessionCard(card, entry, badge, summary, minuteSelect, secondSelect);
 
     stateButtons.forEach((button) => {
       const buttonState = button.dataset.state;
       button.classList.toggle("is-active", buttonState === entry.state);
       button.addEventListener("click", () => {
         if (!canEditSelectedDay()) {
-          saveState.textContent = "Future days are locked";
+          if (saveState) {
+            saveState.textContent = "Future days are locked";
+          }
           return;
         }
         entry.state = buttonState;
         currentDayEntry.entries[definition.field] = entry;
         persist();
-        updateSessionCard(card, entry, badge, summary, minuteRange, secondRange, minuteValue, secondValue, timePreview);
+        updateSessionCard(card, entry, badge, summary, minuteSelect, secondSelect);
       });
     });
 
     const syncDurationPreview = () => {
-      const minutes = Number(minuteRange.value);
-      const seconds = Number(secondRange.value);
+      const minutes = Number(minuteSelect.value);
+      const seconds = Number(secondSelect.value);
       const formatted = formatDuration(minutes, seconds);
-      minuteValue.textContent = String(minutes);
-      secondValue.textContent = String(seconds).padStart(2, "0");
-      timePreview.textContent = formatted;
       summary.textContent = `Time report: ${formatted}`;
     };
 
-    minuteRange.addEventListener("input", syncDurationPreview);
-    secondRange.addEventListener("input", syncDurationPreview);
+    minuteSelect.addEventListener("change", syncDurationPreview);
+    secondSelect.addEventListener("change", syncDurationPreview);
 
     saveButton.addEventListener("click", () => {
       if (!canEditSelectedDay()) {
-        saveState.textContent = "Future days are locked";
+        if (saveState) {
+          saveState.textContent = "Future days are locked";
+        }
         return;
       }
-      const minutes = Number(minuteRange.value);
-      const seconds = Number(secondRange.value);
+      const minutes = Number(minuteSelect.value);
+      const seconds = Number(secondSelect.value);
       entry.note = formatDuration(minutes, seconds);
       currentDayEntry.entries[definition.field] = entry;
       persist();
-      updateSessionCard(card, entry, badge, summary, minuteRange, secondRange, minuteValue, secondValue, timePreview);
+      updateSessionCard(card, entry, badge, summary, minuteSelect, secondSelect);
       refreshSummary();
     });
 
@@ -282,7 +291,7 @@ function canEditSelectedDay() {
   return selectedEditableDay <= currentChallengeDay;
 }
 
-function updateSessionCard(card, entry, badge, summary, minuteRange, secondRange, minuteValue, secondValue, timePreview) {
+function updateSessionCard(card, entry, badge, summary, minuteSelect, secondSelect) {
   const duration = parseDuration(entry.note);
   badge.textContent = stateLabel(entry.state);
   badge.dataset.state = entry.state;
@@ -290,14 +299,25 @@ function updateSessionCard(card, entry, badge, summary, minuteRange, secondRange
   [...card.querySelectorAll(".state-pill")].forEach((button) => {
     button.classList.toggle("is-active", button.dataset.state === entry.state);
   });
-  minuteRange.value = String(duration.minutes);
-  secondRange.value = String(duration.seconds);
-  minuteValue.textContent = String(duration.minutes);
-  secondValue.textContent = String(duration.seconds).padStart(2, "0");
-  timePreview.textContent = formatDuration(duration.minutes, duration.seconds);
+  minuteSelect.value = String(duration.minutes);
+  secondSelect.value = String(duration.seconds);
   summary.textContent = entry.note
     ? `Time report: ${entry.note}`
-    : "Use the sliders to set mins and secs, then save.";
+    : "Pick a preset or choose mins and secs, then save.";
+}
+
+function populateTimeSelect(selectElement, maxValue, selectedValue) {
+  selectElement.innerHTML = "";
+
+  for (let value = 0; value <= maxValue; value += 1) {
+    const option = document.createElement("option");
+    option.value = String(value);
+    option.textContent = value < 10 ? `0${value}` : String(value);
+    if (value === selectedValue) {
+      option.selected = true;
+    }
+    selectElement.appendChild(option);
+  }
 }
 
 function refreshSummary() {
