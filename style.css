@@ -1371,6 +1371,7 @@ body.dashboard-page .workspace-shell {
 
 body.dashboard-page .today-hero__copy {
   padding: 26px;
+  text-align: center;
 }
 
 body.dashboard-page .today-hero__meta {
@@ -1383,6 +1384,8 @@ body.dashboard-page .today-hero__meta {
 body.dashboard-page .today-hero h1 {
   color: var(--text);
   max-width: 9ch;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 body.dashboard-page .today-hero .lede,
@@ -1404,13 +1407,13 @@ body.dashboard-page .today-instruction {
 body.dashboard-page .today-instruction-row {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   gap: 14px;
 }
 
 body.dashboard-page .signer-focus-image {
-  width: 160px;
-  max-width: 26vw;
+  width: 200px;
+  max-width: 28vw;
   height: auto;
   border-radius: 14px;
   border: 1px solid rgba(23, 33, 43, 0.1);
@@ -1815,8 +1818,8 @@ body.dashboard-page .table-shell {
   }
 
   body.dashboard-page .signer-focus-image {
-    width: 120px;
-    max-width: 32vw;
+    width: 150px;
+    max-width: 38vw;
     border-radius: 12px;
   }
 
