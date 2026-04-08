@@ -63,7 +63,7 @@ function renderDailyQuote() {
   }
 
   const quoteIndex = getQuoteIndexForToday();
-  dailyQuote.textContent = QUOTES[quoteIndex];
+  dailyQuote.innerHTML = `${QUOTES[quoteIndex]}<br><span style="font-size: 0.9em; font-weight: 500; color: var(--muted);">– Sadhguru</span>`;
 }
 
 function getQuoteIndexForToday() {

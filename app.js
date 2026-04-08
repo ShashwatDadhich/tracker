@@ -20,7 +20,6 @@ const currentDateLine = document.getElementById("currentDateLine");
 const todayInstruction = document.getElementById("todayInstruction");
 const currentDayTag = document.getElementById("currentDayTag");
 const activeSignerLabel = document.getElementById("activeSignerLabel");
-const workspaceCopy = document.getElementById("workspaceCopy");
 const doneCount = document.getElementById("doneCount");
 const remainingCount = document.getElementById("remainingCount");
 const progressPercent = document.getElementById("progressPercent");
@@ -153,11 +152,9 @@ function renderDashboardState() {
   renderEditableDaySelector();
 
   if (activeSigner === "Shashwat") {
-    todayInstruction.textContent = "You are signed in as Shashwat. Mark Kiran's progress for today or update any earlier day if you missed it.";
-    workspaceCopy.textContent = "Select any day up to today (CT) to view and edit Kiran's progress. Future days are locked.";
+    todayInstruction.textContent = "Signed in as Shashwat.";
   } else {
-    todayInstruction.textContent = "You are signed in as Kiran. Mark Shashwat's progress for today or update any earlier day if you missed it.";
-    workspaceCopy.textContent = "Select any day up to today (CT) to view and edit Shashwat's progress. Future days are locked.";
+    todayInstruction.textContent = "Signed in as Kiran.";
   }
 
   activeSignerLabel.textContent = activeSigner;

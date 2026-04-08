@@ -94,7 +94,8 @@ body::after {
 }
 
 .quote-label {
-  margin: 0;
+  margin: 24px 0 0;
+  text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.72rem;
@@ -103,9 +104,18 @@ body::after {
 }
 
 .auth-card .lede#dailyQuote {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
   max-width: 52ch;
   font-size: 1.06rem;
   line-height: 1.72;
+}
+
+.auth-card h1 {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .auth-actions {
@@ -832,11 +842,17 @@ td:nth-child(2), th:nth-child(2) {
 
   .quote-label {
     font-size: 0.68rem;
+    text-align: center;
+  }
+
+  .auth-card h1 {
+    text-align: center;
   }
 
   .auth-card .lede#dailyQuote {
     font-size: 0.96rem;
     line-height: 1.64;
+    text-align: center;
   }
 
   h1 {
