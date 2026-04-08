@@ -2,7 +2,7 @@ const SIGNER_STORAGE_KEY = "accountability-signer-v1";
 const DAILY_QUOTE_KEY = "dailyQuote";
 const QUOTES = [
   "Imagination is useful as a plan or a fantasy. But the only thing you can experience is what is here Right Now.",
-  "Today is a day to clear your home, your mind, and your emotions from all that is not useful to you, all that impedes your experience of life, and have a fresh start.",
+  "When you meet someone, only the sweetest part of you should touch them.",
   "Optimists hallucinate; pessimists get depressed. Both will not get anywhere. You must be willing and able to see everything the way it is.",
   "Whatever life throws at you, if you learn to shake it off and stand on it, you can make it the basis of your growth, maturity, and well-being.",
   "Someone says something nasty because something nasty is happening within them.",
