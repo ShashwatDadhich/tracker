@@ -203,16 +203,9 @@ function cellExportValue(entry) {
     return "";
   }
 
-  const minutes = Number(match[1]);
-  const seconds = Number(match[2]);
-  
-  if (minutes === 0 && seconds === 0) {
-    return "No time reported";
-  }
-
-  const minutesStr = String(minutes);
-  const secondsStr = String(seconds).padStart(2, "0");
-  return `${minutesStr}:${secondsStr}`;
+  const minutes = String(Number(match[1]));
+  const seconds = String(Number(match[2])).padStart(2, "0");
+  return `${minutes}:${seconds}`;
 }
 
 function refreshSummary() {
