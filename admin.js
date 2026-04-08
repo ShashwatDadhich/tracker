@@ -18,6 +18,7 @@ const matrixMorning = document.getElementById("matrixMorning");
 const matrixEvening = document.getElementById("matrixEvening");
 const matrixKiran = document.getElementById("matrixKiran");
 const matrixShashwat = document.getElementById("matrixShashwat");
+const downloadCsvBtn = document.getElementById("downloadCsvBtn");
 
 const activeSigner = loadActiveSigner();
 if (activeSigner !== "Admin") {
@@ -28,6 +29,10 @@ let currentChallengeDay = findCurrentDay();
 let store = createDefaultState();
 
 init();
+
+downloadCsvBtn?.addEventListener("click", () => {
+  downloadFile("40-day-yoga-timesheet.csv", buildCsv(), "text/csv;charset=utf-8");
+});
 
 logoutBtn.addEventListener("click", () => {
   window.localStorage.removeItem(SIGNER_STORAGE_KEY);
@@ -149,6 +154,58 @@ function renderMatrix() {
   matrixEvening.textContent = `${Math.round(rateDone(eveningEntries) * 100)}%`;
   matrixKiran.textContent = `${Math.round(rateDone(kiranEntries) * 100)}%`;
   matrixShashwat.textContent = `${Math.round(rateDone(shashwatEntries) * 100)}%`;
+}
+
+function buildCsv() {
+  const headers = ["Day", "Date", "Kiran AM", "Kiran PM", "Shashwat AM", "Shashwat PM"];
+  const rows = store.map((row) => [
+    row.day,
+    row.date,
+    cellExportValue(row.entries["kiran-am"]),
+    cellExportValue(row.entries["kiran-pm"]),
+    cellExportValue(row.entries["shashwat-am"]),
+    cellExportValue(row.entries["shashwat-pm"]),
+  ]);
+
+  return [headers, ...rows]
+    .map((values) => values.map(csvEscape).join(","))
+    .join("\n");
+}
+
+function downloadFile(filename, content, mimeType) {
+  const blob = new Blob([content], { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 0);
+}
+
+function csvEscape(value) {
+  const text = String(value);
+  if (/[",\n]/.test(text)) {
+    return `"${text.replaceAll('"', '""')}"`;
+  }
+
+  return text;
+}
+
+function cellExportValue(entry) {
+  if (!entry || !entry.note) {
+    return "";
+  }
+
+  const match = entry.note.match(/^(\d+)\s*mins?\s*(\d+)\s*secs?$/i);
+  if (!match) {
+    return "";
+  }
+
+  const minutes = String(Number(match[1]));
+  const seconds = String(Number(match[2])).padStart(2, "0");
+  return `${minutes}:${seconds}`;
 }
 
 function refreshSummary() {

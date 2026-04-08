@@ -1198,6 +1198,16 @@ body.admin-page .matrix-card p {
     margin-bottom: 12px;
   }
 
+  body.admin-page .workspace-tools--actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  body.admin-page .export-button {
+    width: 100%;
+    min-width: 0;
+  }
+
   body.admin-page .workspace-shell__head h2 {
     font-size: 1.35rem;
   }
@@ -1209,6 +1219,51 @@ body.admin-page .matrix-card p {
   body.admin-page .bar-chart__item small,
   body.admin-page .readonly-cell small {
     font-size: 0.88rem;
+
+  body.admin-page .workspace-tools--actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  body.admin-page .export-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 164px;
+    border: 1px solid rgba(15, 118, 110, 0.2);
+    border-radius: 14px;
+    padding: 11px 16px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 248, 250, 0.96)),
+      var(--panel-strong);
+    color: var(--accent);
+    font-size: 0.86rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow:
+      0 12px 22px rgba(15, 23, 42, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease, color 140ms ease;
+  }
+
+  body.admin-page .export-button:hover {
+    transform: translateY(-1px);
+    border-color: rgba(15, 118, 110, 0.32);
+    box-shadow:
+      0 16px 24px rgba(15, 23, 42, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+    color: var(--text);
+  }
+
+  body.admin-page .export-button:focus-visible {
+    outline: 2px solid rgba(95, 106, 212, 0.28);
+    outline-offset: 3px;
+  }
   }
 
   body.admin-page .workspace-shell__head p,
